@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="confetti.js"></script>
+    <script src="confetti.min.js"></script>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 500px;
+        }
+        .container .question{
+            margin: 40px;
+            font-size: xx-large;
+            font-weight: 700;
+            text-align: center;
+        }
+        .container .button button{
+            margin: 70px;
+            width: 100px;
+            height: 35px;
+            background-color: pink;
+            color: blue;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Is Today Is Ur Birthday ?</div>
+        <div class="img">
+            <img src="AdobeStock_180980941_Preview.jpg" alt="" id="img1">
+            <img src="AdobeStock_450514670_Preview.jpg" alt="" id="img2" hidden>
+        </div>
+        <div class="button">
+            <button class="yes-btn" onclick="celebrate()">Yes</button>
+            <h3 style="text-align: center;" >Created by Jahanzaib</h3>
+        </div>
+        <div class="timer" style="display: none;"></div>
+    </div>
+
+    <script>
+        function celebrate() {
+            const questionText = document.querySelector('.question');
+            const timerMessage = document.querySelector('.timer');
+            const yesButton = document.querySelector('.yes-btn');
+            yesButton.disabled = true;
+            document.getElementById('img1').style.display = 'none';
+            document.getElementById('img2').removeAttribute('hidden');
+            timerMessage.style.display = 'block';
+            setTimeout(function () {
+                confetti.start();
+            }, 1000);
+            let countdown = 10;
+            const countdownInterval = setInterval(function () {
+                questionText.innerHTML = `WOW <br> Let's Celebrate <br> Your surprise is going to be ready in ${countdown} seconds <br> Please wait....`;
+                countdown--;
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    timerMessage.style.display = 'none';
+                    setTimeout(function () {
+                        window.location.href = "stack/index.html";
+                    }, 3000); 
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
